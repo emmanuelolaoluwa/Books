@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
-var JobSchema = new mongoose.Schema({
+var bookSchema = new mongoose.Schema({
     isbn: Number,
     title: String,
+    subtitile: String,
     author: String,
     publish_date: { type: Date, default: Date.now },
     publisher: String,
-    numbOfPages: Number
+    numbOfPages: Number,
+    description: String
 });
 
-module.exports = mongoose.model('Job', JobSchema);
+module.exports = mongoose.model('Job', bookSchema);
