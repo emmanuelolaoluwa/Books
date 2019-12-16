@@ -2,12 +2,13 @@ var mongoose = require('mongoose');
 var bookSchema = new mongoose.Schema({
     isbn: Number,
     title: String,
-    subtitile: String,
+    subtitle: String,
     author: String,
     publish_date: { type: Date, default: Date.now },
     publisher: String,
-    numbOfPages: Number,
-    description: String
+    numOfPages: Number,
+    description: String,
+    website: String
 });
 
-module.exports = mongoose.model('Job', bookSchema);
+module.exports = mongoose.model('Book', bookSchema);

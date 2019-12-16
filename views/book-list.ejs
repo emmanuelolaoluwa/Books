@@ -21,19 +21,45 @@
                     <div class="row">
            
                         <div class="modal-body">
-                            <form id="editForm" action="http://localhost:3000/books/save" method="PUT">
+                            <form id="editForm" action="/books/search" method="POST">
                                 <h3>Search By</h3>
                                 <div class="form-group">
                                     <label for="ISBN">ISBN</label>
                                     <input class="form-control" name="isbn" id="isbn">
                                 </div>
-            
-                                <div class="form-group">
-                                    <label for="Title">Title</label>
-                                    <input class="form-control" name="title" id="title">
-                                </div>
                                 
-                                <!--Other fields-->
+                                <button type="submit" class="btn btn-secondary my-2">Submit</button>
+                            </form>
+                            <% if (typeof book !== 'undefined') { %>
+                                <% if (book) { %>
+                                <h2>Found Book</h2>
+                                <div class = "album py-5 bg-light">
+                                    <div class = "container" > 
+                                        <div class = "row">
+                                            <div class="col-md-4"> 
+                                                <div class="card mb-4 shadown-sm">
+                                                    <div class="card-body"> 
+                                                        <h5 class="card-title"><%= book.title %></h5>
+                                                        <h6 class="card-subtitle mb-2 text-muted"><%= book.isbn %></h6>
+                                                        <div>Subtitle: <%= book.subtitle %></div>
+                                                        <div>Author: <%= book.author %></div>
+                                                        <div>Published: <%= book.published %></div>
+                                                        <div>Publisher:<%= book.publisher %></div>
+                                                        <div>Number Of Pages: <%= book.numOfPages %></div>
+                                                        <div>Description: <%= book.description %></div>
+                                                        <div>Website: <%= book.website %></div>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } else { %>
+                                    <h2>No Found Book</h2>
+                                <% }%>
+                            <% } %>
+                            <% if (typeof books !== 'undefined') { %>
                                 <h2>All Books</h2>
                                 <div class = "album py-5 bg-light">
                                 <div class = "container" > 
@@ -47,25 +73,24 @@
                                                             <div>Author: <%= books[i].author %></div>
                                                             <div>Published: <%= books[i].published %></div>
                                                             <div>Publisher:<%= books[i].publisher %></div>
-                                                            <div>Number Of Pages: <%= books[i].pages %></div>
+                                                            <div>Number Of Pages: <%= books[i].numOfPages %></div>
                                                             <div>Description: <%= books[i].description %></div>
                                                             <div>Website: <%= books[i].website %></div>
                                                             <hr>
-                                                            <button type="button" class="btn btn-danger">Delete</button>
-                                                            <button types="button" class="btn btn-primary"
-                                                                data-target="#editBookModal" onClick="">
-                                                                Edit
+                                                            <button type="button" class="btn btn-danger">
+                                                                <a class="text-light" href="/books/<%= books[i]._id %>/delete"
+                                                                    onclick="return confirm('Are you sure you want to delete')">Delete</a>
+                                                            </button>
+                                                            <button type="button" class="btn btn-info">
+                                                                <a class="text-light" href="/books/<%= books[i]._id %>/edit">Edit</a>
                                                             </button>
                                                         </div>
-                                                     </div>
-                                                     </div>
-                                                     <% } %>  </div>
+                                                    </div>
+                                                    </div>
+                                                    <% } %>  </div>
                                 </div>
                                 </div>
-
-                                
-                                <button type="submit" class="btn btn-secondary my-2">Submit</button>
-                            </form>
+                            <% } %>
                         </div>
                     </div>
                 </div>
