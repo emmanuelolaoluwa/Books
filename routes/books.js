@@ -10,9 +10,11 @@ const bodyParser = require('body-parser');
 router.get('/', function(req, res, next) {
  Book.find(function (err, books) {
    if (err) return next(err);
-   res.json(books);
+   //res.json(books);
+    res.render('book-list.ejs', {books: books});
  });
 });
+
 
 /* GET SINGLE BOOK BY ID */
 
